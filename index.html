@@ -1,0 +1,139 @@
+<html>
+<head>
+<style>@import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+
+
+body{
+  font-family:Overpass;
+}
+.new_card {
+  border: solid black 1px;
+  padding: 0px 20px 20px 20px;
+  margin: 20px;
+  background-color:#caffbf;
+}
+
+.shelf {
+  padding: 20px 20px 20px 20px;
+  margin: 20px;
+  
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+.card {
+  width: 200px;
+  height: 120px;
+  word-wrap: break-word;
+  text-align:center;
+  margin: 10px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
+  position: relative;
+}
+
+button {
+  padding:5px;
+}
+
+input { margin:10px}
+
+
+</style>
+<script>var content = {}
+for (var i = 0; i < localStorage.length; i++) {
+  var term = localStorage.key(i);
+  var explain = localStorage.getItem(localStorage.key(i))
+  content[term] = explain;
+}
+console.log(content)
+colors=["#fbf8cc","#fde4cf","#ffcfd2","#f1c0e8","#cfbaf0","#a3c4f3","#90dbf4","#8eecf5","#98f5e1","#b9fbc0"];
+for (var key in content) {
+  var term = key;
+  var explain = content[key];
+  var flashcard = document.createElement("div");
+  var question = document.createElement('h2');
+  var answer = document.createElement('h5');
+  flashcard.addEventListener("click", show);
+  question.innerHTML = term;
+  answer.innerHTML = explain;
+  flashcard.appendChild(question);
+  flashcard.appendChild(answer);
+  document.getElementById("shelf").appendChild(flashcard);
+  flashcard.className = 'card';
+  var k=Math.floor(Math.random()*colors.length)
+  flashcard.style.backgroundColor=colors[k]
+  document.getElementById("term").value = "";
+  document.getElementById("explain").value = "";
+  answer.style.display = "none"
+}
+
+function delete_all() {
+  localStorage.clear();
+  document.getElementById("shelf").innerHTML = ""
+}
+
+function new_card() {
+  document.getElementById("new_card").style.display = ""
+}
+
+function cancel_card() {
+  document.getElementById("new_card").style.display = "none"
+}
+
+function add_card() {
+  var term = document.getElementById("term").value;
+  var explain = document.getElementById("explain").value;
+  localStorage.setItem(term, explain);
+  console.log(localStorage);
+  var flashcard = document.createElement("div");
+  var question = document.createElement('h2');
+  var answer = document.createElement('h5');
+  flashcard.addEventListener("click", show);
+  question.innerHTML = term;
+  answer.innerHTML = explain;
+  flashcard.appendChild(question);
+  flashcard.appendChild(answer);
+  document.getElementById("shelf").appendChild(flashcard);
+  flashcard.className = 'card';
+  var k=Math.floor(Math.random()*colors.length)
+  flashcard.style.backgroundColor=colors[k]
+  document.getElementById("term").value = "";
+  document.getElementById("explain").value = "";
+}
+
+function show() {
+  if (this.children[1].style.display == "none") {
+    this.children[1].style.display = ""
+  } else {
+    this.children[1].style.display = "none"
+  }
+}
+</script>
+</head>
+<body>
+<button onclick="new_card()">Нова картка</button>
+<button onclick="delete_all()">Видалити картки</button>
+
+<div class="new_card" id="new_card" style="display:none">
+<h2>Нова картка</h2>
+Слово <input type="text" name="term" id="term"><br> 
+Пояснення <textarea name="explain" id="explain"> </textarea>
+<br> <button onclick="add_card()">
+Додати картку
+</button>
+<button onclick="cancel_card()">
+Скасувати
+</button>
+</div>
+
+<div class="shelf" id="shelf">
+
+</div>
+</body>
+</html>
