@@ -46,9 +46,9 @@ input { margin:10px}
 
 </style>
 <script>var content = {}
-for (var i = 0; i < localStorage.length; i++) {
-  var term = localStorage.key(i);
-  var explain = localStorage.getItem(localStorage.key(i))
+for (var i = 0; i < sessionStorage.length; i++) {
+  var term = sessionStorage.key(i);
+  var explain = sessionStorage.getItem(sessionStorage.key(i))
   content[term] = explain;
 }
 console.log(content)
@@ -89,8 +89,8 @@ function cancel_card() {
 function add_card() {
   var term = document.getElementById("term").value;
   var explain = document.getElementById("explain").value;
-  localStorage.setItem(term, explain);
-  console.log(localStorage);
+  sessionStorage.setItem(term, explain);
+  console.log(sessionStorage);
   var flashcard = document.createElement("div");
   var question = document.createElement('h2');
   var answer = document.createElement('h5');
