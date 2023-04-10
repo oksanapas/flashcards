@@ -45,8 +45,11 @@ input { margin:10px}
 
 
 </style>
-<script>var content = {}
-for (var i = 0; i < sessionStorage.length; i++) {
+<script>
+  
+function initializeFlashcards() {
+ var content = {}
+ for (var i = 0; i < sessionStorage.length; i++) {
   var term = sessionStorage.key(i);
   var explain = sessionStorage.getItem(sessionStorage.key(i))
   content[term] = explain;
@@ -72,6 +75,10 @@ for (var key in content) {
   document.getElementById("explain").value = "";
   answer.style.display = "none"
 }
+}
+  
+  
+  
 
 function delete_all() {
   localStorage.clear();
@@ -114,6 +121,8 @@ function show() {
     this.children[1].style.display = "none"
   }
 }
+  
+  window.addEventListener('load', initializeFlashcards);
 </script>
 </head>
 <body>
