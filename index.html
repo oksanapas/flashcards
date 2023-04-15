@@ -49,12 +49,11 @@ input { margin:10px}
   
 function initializeFlashcards() {
  var content = {}
- for (var i = 0; i < sessionStorage.length; i++) {
-  var term = sessionStorage.key(i);
-  var explain = sessionStorage.getItem(sessionStorage.key(i))
+ for (var i = 0; i < localStorage.length; i++) {
+  var term = localStorage.key(i);
+  var explain = localStorage.getItem(localStorage.key(i))
   content[term] = explain;
 }
-console.log(content)
 colors=["#fbf8cc","#fde4cf","#ffcfd2","#f1c0e8","#cfbaf0","#a3c4f3","#90dbf4","#8eecf5","#98f5e1","#b9fbc0"];
 for (var key in content) {
   var term = key;
@@ -96,8 +95,7 @@ function cancel_card() {
 function add_card() {
   var term = document.getElementById("term").value;
   var explain = document.getElementById("explain").value;
-  sessionStorage.setItem(term, explain);
-  console.log(sessionStorage);
+  localStorage.setItem(term, explain);
   var flashcard = document.createElement("div");
   var question = document.createElement('h2');
   var answer = document.createElement('h5');
